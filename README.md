@@ -8,7 +8,7 @@
   </a>
 </p>
 
-# RiqatonyDesk
+# Rico Plus
 
 **Friendly. Fast. Focused.**
 
