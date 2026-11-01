@@ -1,6 +1,4 @@
 <p align="center">
-
-Current source edition: RiqatonyDesk 1.0.0-x19.5.
   <a href="https://github.com/brunonlinespace/riqatonydesk">
     <img
       src="riqatony_desk/assets/icons/riqatonydesk-about.png"
