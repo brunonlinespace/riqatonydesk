@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "tool": "desk-health-check",
+  "application": {
+    "id": "riqatony-desk",
+    "version": "1.0.0-x19.4",
+    "package": "riqatony_desk"
+  },
+  "adapter": {
+    "id": "riqatony-desk-v1",
+    "contract": 1
+  },
+  "capabilities": [
+    "dashboard",
+    "layout",
+    "painting",
+    "resources",
+    "scalability",
+    "scan_cancel",
+    "scanning",
+    "scrolling",
+    "search",
+    "selection",
+    "shutdown",
+    "sorting",
+    "startup",
+    "themes"
+  ],
+  "source_files": {
+    "main.py": "7ba357ba6104dc8d584be2d9a0f5e5ad2d4e7e8ecc6e46f6d11f9bcc74e51cb8",
+    "suite-pythoine-component.json": "26f91465de3eef865ab2bc44bf4b6f1be6bcb3ea0858548be97a2a1ef4d88db5",
+    "riqatony_desk/app.py": "c6001a0b6baa0d71b27e23180e6906b865271d408c357c343e9b728a6b5258f0",
+    "riqatony_desk/widgets/main_window.py": "be4dcad80606b0f626b9884bfe18e59acce17791686bf322a7f3c74edfa2cdc6",
+    "riqatony_desk/widgets/workspace/dashboard.py": "c96563a28034fc1077b28ffe96b29206835645d8e232bd25e1173b2d321afed0",
+    "riqatony_desk/widgets/workspace/dashboard_card.py": "a4461d38aa77fffc92a26a728d2bb74be70396bd32197c67979e2b5c5a5ca05d",
+    "riqatony_desk/services/filesystem_watcher.py": "431d2811be85c95b0b6d35e9b9c97065948c5ae2c30a5030c33f6ea3d369c72b",
+    "riqatony_desk/services/config_service.py": "bbdaf779cae59295ee7564ddc871966f7ad34a69380ef67870a20fce2542c5f3"
+  }
+}

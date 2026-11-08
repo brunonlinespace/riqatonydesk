@@ -1,0 +1,22 @@
+{
+  "id": "riqatonydesk",
+  "name": "RiqatonyDesk",
+  "description": "Managed-workspace rich-text application in the Plus family.",
+  "component_kind": "extension",
+  "extensions": [],
+  "portable_command": [
+    "main.py"
+  ],
+  "icon": "riqatony_desk/assets/icons/riqatonydesk.png",
+  "version": "1.0.0",
+  "publisher": "brunonlinespace",
+  "repository": "https://github.com/brunonlinespace/riqatonydesk",
+  "desktop_id": "riqatonydesk",
+  "tagline": "Friendly. Fast. Focused.",
+  "publisher_id": "brunonlinespace",
+  "capabilities": {
+    "routing": false,
+    "open": false,
+    "create": false
+  }
+}
