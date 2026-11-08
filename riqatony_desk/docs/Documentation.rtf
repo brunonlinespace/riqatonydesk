@@ -1,0 +1,100 @@
+{\rtf1\ansi\ansicpg1252\deff0{\fonttbl{\f0 Segoe UI;}{\f1 Consolas;}}\viewkind4\uc1
+\fs34\b RiqatonyDesk\b0\fs22\par\par
+\par
+RiqatonyDesk 1.0.0-x11.2 is a Ribbon-based RTF editor with workspace navigation,\par
+Open documents now survive external delete or rename-away through a shared live-path safety monitor; missing backing files remain protected until preserved, explicitly recreated, or explicitly closed.\par
+folder dashboards, background discovery, and conservative file handling. It\par
+stores ordinary .rtf files and does not introduce a private document format.\par
+\par
+\fs27\b Highlights\b0\fs22\par
+\par
+\li360\fi-180\bullet\tab Registered workspaces with a recursive sidebar and fast switching\par\li0\fi0
+\li360\fi-180\bullet\tab Dynamic Workspace(s) quick selector; inactive roots are never scanned\par\li0\fi0
+\li360\fi-180\bullet\tab Workspace and folder dashboards in List or Grid view\par\li0\fi0
+\li360\fi-180\bullet\tab Exactly two card actions: Open and View Only\par\li0\fi0
+\li360\fi-180\bullet\tab One rich-text Ribbon with File, Home, Insert, View, and Help tabs\par\li0\fi0
+\li360\fi-180\bullet\tab Full-width Ribbon above the sidebar and document/dashboard surface\par\li0\fi0
+\li360\fi-180\bullet\tab Riqa Icons Heritage, Humility, and Harmony, each with light and dark variants; all three are available from Settings \u8594? App Icons and Configure, and Modern remains the default\par\li0\fi0
+\li360\fi-180\bullet\tab Searchable shortcuts with case-insensitive, modifier-order-independent matching\par\li0\fi0
+\li360\fi-180\bullet\tab Safe create, duplicate, rename, move, import, and removal operations\par\li0\fi0
+\li360\fi-180\bullet\tab Dirty Duplicate and External Editor choices distinguish the current unsaved document from the last saved disk version, with remembered policies under Settings\par\li0\fi0
+\li360\fi-180\bullet\tab F2 renames either the active RTF file or the selected Workspace subfolder\par\li0\fi0
+\li360\fi-180\bullet\tab Atomic RTF saving, external-change detection, and bounded file loading\par\li0\fi0
+\li360\fi-180\bullet\tab Save, Save As, Save and New, Save and Dashboard, and Save and Exit\par\li0\fi0
+\li360\fi-180\bullet\tab Standards-based RTF lists plus curated LibreOffice interoperability coverage\par\li0\fi0
+\par
+\fs27\b Run from source\b0\fs22\par
+\par
+\par
+\f1\fs19 python3 -m venv .venv\par\f0\fs22
+\f1\fs19 source .venv/bin/activate\par\f0\fs22
+\f1\fs19 python -m pip install -r riqatony_desk/requirements.txt\par\f0\fs22
+\f1\fs19 python main.py\par\f0\fs22
+\par
+\par
+Useful launch forms:\par
+\par
+\par
+\f1\fs19 python main.py --version\par\f0\fs22
+\f1\fs19 python main.py --setup\par\f0\fs22
+\f1\fs19 python main.py document.rtf\par\f0\fs22
+\f1\fs19 python main.py --open-file document.rtf\par\f0\fs22
+\par
+\par
+Starting without a file opens the Dashboard and creates no document. New RTF\par
+File asks the editor layer to create a complete, valid RTF document; RiqatonyDesk\par
+never uses an empty placeholder file.\par
+\par
+\fs27\b Workspaces and OS file opening\b0\fs22\par
+\par
+Only the active workspace is scanned. An RTF opened by the operating system\par
+inside that workspace uses its normal workspace entry. An RTF outside the\par
+workspace opens as a transient external session: it is not copied, imported,\par
+or added to workspace navigation or dashboards.\par
+\par
+External RTF drops use explicit destinations. Drop onto the Dashboard button, Main Dashboard, or empty sidebar tree to import to the Workspace root; drop onto a sidebar folder to import to that folder; drop onto a sidebar file to import to that file's containing folder; and drop onto a Folder Dashboard to import to that folder. Dropping a supported RTF onto the editor opens it through RiqatonyDesk' external-file lifecycle instead of importing it. Unrelated application chrome rejects drops. Internal managed-document drag-to-move uses the same sidebar destination rules: folder row to that folder, file row to that file's containing folder, and empty tree or Dashboard button to Workspace root.\par
+\par
+Ctrl+O opens workspace management. RiqatonyDesk has no separate Open RTF\par
+Document command; desktop file associations and workspace navigation cover\par
+that workflow.\par
+\par
+\fs27\b AppImage\b0\fs22\par
+\par
+\par
+\f1\fs19 ./riqatony_desk/packaging/fedora/install-build-deps.sh\par\f0\fs22
+\f1\fs19 ./riqatony_desk/packaging/fedora/build-appimage.sh\par\f0\fs22
+\f1\fs19 chmod +x riqatony_desk/dist/RiqatonyDesk-1.0.0-x11.2-x86_64.AppImage\par\f0\fs22
+\f1\fs19 ./riqatony_desk/dist/RiqatonyDesk-1.0.0-x11.2-x86_64.AppImage\par\f0\fs22
+\par
+\par
+The desktop launcher accepts one RTF path through %f. Files outside the active workspace open as transient external sessions; AppImage mode keeps configuration and documents outside the read-only bundle.\par
+\par
+\fs27\b Configuration and diagnostics\b0\fs22\par
+\par
+Configuration uses the independent per-user RiqatonyDesk directory\par
+~/.config/brunonlinespace/riqatonydesk, without reading old Rico Plus\par
+preferences. Optional shutdown timing is enabled with:\par
+\par
+\par
+\f1\fs19 RIQATONYDESK_PROFILE_SHUTDOWN=1 python main.py\par\f0\fs22
+\par
+\par
+\fs27\b Validation\b0\fs22\par
+\par
+\par
+\f1\fs19 python -m riqatony_desk.tools.release_check\par\f0\fs22
+\par
+\par
+See QA.md, BUILDING.md, and RELEASE_CHECKLIST.md for the complete gates.\par
+\par
+\fs27\b Documentation command\b0\fs22\par
+\par
+Help \u8594? Documentation opens the bundled Documentation.rtf as a transient external RiqatonyDesk document in its own window. The source-tree Markdown files in docs/ remain developer/release documentation and are not the user-facing Help document.\par
+\par
+\fs27\b License and links\b0\fs22\par
+\par
+RiqatonyDesk is GPL-3.0-or-later. See LICENSE.\par
+\par
+\li360\fi-180\bullet\tab Repository: https://github.com/brunonlinespace/riqatonydesk\par\li0\fi0
+\li360\fi-180\bullet\tab Issues: https://github.com/brunonlinespace/riqatonydesk/issues\par\li0\fi0
+}

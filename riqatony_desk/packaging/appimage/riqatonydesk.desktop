@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=RiqatonyDesk
+GenericName=RTF Workspace Editor
+Comment=Create, edit, view, and organize RTF documents in workspaces
+Exec=riqatonydesk %f
+Icon=riqatonydesk
+Terminal=false
+Categories=Office;TextEditor;Utility;
+Keywords=RTF;Editor;Notes;Workspace;
+MimeType=application/rtf;text/rtf;application/x-rtf;
+StartupNotify=true
+StartupWMClass=RiqatonyDesk
+X-AppImage-Version=1.0.0
