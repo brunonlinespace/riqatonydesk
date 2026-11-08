@@ -1,0 +1,131 @@
+# RiqatonyDesk
+# Copyright (C) 2026 Bruno Machado
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+"""About dialog for RiqatonyDesk."""
+
+from __future__ import annotations
+
+import html
+from pathlib import Path
+
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QColor, QPalette, QPixmap
+from PyQt6.QtWidgets import (
+    QDialog,
+    QDialogButtonBox,
+    QLabel,
+    QVBoxLayout,
+    QWidget,
+)
+
+from riqatony_desk.app_constants import APP_BRAND_NAME, APP_REVISION, GITHUB_URL
+from riqatony_desk.services.desktop_launcher import DesktopLauncher
+
+
+APP_TAGLINE = "Friendly. Fast. Focused."
+
+
+class AboutDialog(QDialog):
+    """Pad-family About dialog for RiqatonyDesk."""
+
+    def __init__(
+        self,
+        icon_path: str | Path,
+        config_path: str | Path,
+        parent: QWidget | None = None,
+        *,
+        desktop_launcher: DesktopLauncher | None = None,
+    ) -> None:
+        super().__init__(parent)
+        self.desktop_launcher = desktop_launcher
+        self.setWindowTitle(f"About — {APP_BRAND_NAME}")
+        self.setModal(False)
+        self.setMinimumSize(700, 470)
+        self.resize(700, 470)
+
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(24, 22, 24, 18)
+        layout.setSpacing(10)
+
+        pixmap = QPixmap(str(icon_path))
+        if not pixmap.isNull():
+            logo = QLabel(self)
+            logo.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            logo.setPixmap(
+                pixmap.scaled(
+                    112,
+                    112,
+                    Qt.AspectRatioMode.KeepAspectRatio,
+                    Qt.TransformationMode.SmoothTransformation,
+                )
+            )
+            layout.addWidget(logo)
+
+        application_name = QLabel(f"<h2>{APP_BRAND_NAME}</h2>", self)
+        application_name.setTextFormat(Qt.TextFormat.RichText)
+        application_name.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(application_name)
+
+        version = QLabel(f"Version {APP_REVISION}", self)
+        version.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(version)
+
+        tagline = QLabel(f"<b>{APP_TAGLINE}</b>", self)
+        tagline.setTextFormat(Qt.TextFormat.RichText)
+        tagline.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(tagline)
+
+        description = QLabel(
+            "A workspace-scale Rich Text Format editor powered by Ricopad's "
+            "standards-based RTF engine and Ribbon.",
+            self,
+        )
+        description.setWordWrap(True)
+        description.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(description)
+
+        preferences_path = html.escape(str(config_path)).replace("/", "/&#8203;")
+        details = QLabel(self)
+        details.setTextFormat(Qt.TextFormat.RichText)
+        details.setWordWrap(True)
+        details.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        details.setOpenExternalLinks(False)
+        details.setTextInteractionFlags(Qt.TextInteractionFlag.TextBrowserInteraction)
+        # Apply the light-palette link roles before Qt parses the RichText HTML,
+        # so anchor foregrounds cannot inherit a pale host-theme link colour.
+        details_palette = details.palette()
+        if details_palette.color(QPalette.ColorRole.Window).lightness() >= 140:
+            about_link_blue = QColor("#0068A6")
+            details_palette.setColor(QPalette.ColorRole.Link, about_link_blue)
+            details_palette.setColor(QPalette.ColorRole.LinkVisited, about_link_blue)
+            details.setPalette(details_palette)
+        details.setText(
+            f"<a href='{GITHUB_URL}'>{GITHUB_URL}</a><br>"
+            "Built on Python, PyQt6, Nuxpad 2, "
+            "<a href='https://github.com/59de44955ebd/PyWordpad'>PyWordpad</a> "
+            "and Microsoft WordPad-inspired document features.<br>"
+            f"<b>Configuration:</b> {preferences_path}<br><br>"
+            "Copyright © 2026 Bruno Machado<br>"
+            "[<a href='https://github.com/brunonlinespace/'>"
+            "https://github.com/brunonlinespace/</a>]<br>"
+            "Licensed under the GNU General Public License v3 or later."
+        )
+        details.linkActivated.connect(self._open_link)
+        layout.addWidget(details)
+
+        buttons = QDialogButtonBox(QDialogButtonBox.StandardButton.Ok, self)
+        ok_button = buttons.button(QDialogButtonBox.StandardButton.Ok)
+        if ok_button is not None:
+            ok_button.setText("OK")
+        buttons.accepted.connect(self.close)
+        layout.addWidget(buttons)
+
+    def _open_link(self, url: str) -> None:
+        if self.desktop_launcher is not None:
+            self.desktop_launcher.open_url(url)

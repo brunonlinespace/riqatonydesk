@@ -1,0 +1,1 @@
+"""RiqatonyDesk MainWindow responsibility mixins."""

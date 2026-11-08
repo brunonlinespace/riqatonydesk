@@ -1,0 +1,1 @@
+"""RiqatonyDesk application dialogs."""
